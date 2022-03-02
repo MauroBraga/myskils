@@ -1,20 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, Text, StyleSheet, TextInput, Platform, TouchableOpacity } from 'react-native';
 
 
 export  function Home(){
+
+    const [newSkil, setNewSkil] = useState('');
+    const [mySkills, setMySkills] = useState([]);
+
+    function handleAddNewSkill(){
+        setMySkills(oldState =>[...oldState, newSkil]);
+        setNewSkil('')
+    }
+
     return (
         <SafeAreaView style={styles.container}>
           <Text style={styles.title}>
               Welcome Mauro
           </Text>
-          <TextInput style={styles.input} placeholder="New Skil" placeholderTextColor="#555"/>
-          <TouchableOpacity style={styles.button} activeOpacity={.7}>
+          <TextInput 
+                style={styles.input} 
+                placeholder="New Skil" 
+                placeholderTextColor="#555"
+                onChangeText={setNewSkil}
+            />
+          <TouchableOpacity 
+                onPress={handleAddNewSkill}
+                style={styles.button} 
+                activeOpacity={.7}>
               <Text style={styles.buttonText}>Add</Text>
           </TouchableOpacity>
-          <Text style={[styles.title, {marginTop:20}]}>
-              My Skils
+          <Text style={[styles.title, {marginVertical:50}]}>
+              My Skills
           </Text>
+
+        {
+            mySkills.map(skill => (
+                <TouchableOpacity key={skill} style={styles.buttonSkill}>
+                    <Text style={styles.textSkill}>
+                        {skill}
+                    </Text>
+                </TouchableOpacity>
+            ))
+
+        }
+        
+        
+        
         </SafeAreaView>
       );
 }
@@ -49,6 +80,18 @@ const styles = StyleSheet.create({
     buttonText:{
         color: '#FFF',
         fontSize: 17,
+        fontWeight: 'bold'
+    },
+    buttonSkill: {
+        backgroundColor: '#1f1e25',
+        padding: 15,
+        borderRadius: 50,
+        alignItems: 'center', 
+        marginVertical: 10
+    },
+    textSkill:{
+        color: '#FFF',
+        fontSize: 22,
         fontWeight: 'bold'
     }
 });
