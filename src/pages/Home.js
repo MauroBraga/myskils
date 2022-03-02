@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, StyleSheet, TextInput, Platform, TouchableOpacity } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, TextInput, Platform } from 'react-native';
+import { Button } from '../components/Button';
+import { SkillCard } from '../components/SkyllCard';
 
 
 export  function Home(){
@@ -23,29 +25,16 @@ export  function Home(){
                 placeholderTextColor="#555"
                 onChangeText={setNewSkil}
             />
-          <TouchableOpacity 
-                onPress={handleAddNewSkill}
-                style={styles.button} 
-                activeOpacity={.7}>
-              <Text style={styles.buttonText}>Add</Text>
-          </TouchableOpacity>
+          <Button/>
           <Text style={[styles.title, {marginVertical:50}]}>
               My Skills
           </Text>
 
         {
             mySkills.map(skill => (
-                <TouchableOpacity key={skill} style={styles.buttonSkill}>
-                    <Text style={styles.textSkill}>
-                        {skill}
-                    </Text>
-                </TouchableOpacity>
+                <SkillCard />
             ))
-
         }
-        
-        
-        
         </SafeAreaView>
       );
 }
@@ -69,29 +58,5 @@ const styles = StyleSheet.create({
         padding: Platform.OS ==='ios'?15:10,
         marginTop:30,
         borderRadius:7
-    },
-    button: {
-        backgroundColor: '#A370F7',
-        padding: 15,
-        borderRadius:7,
-        alignItems:  'center',
-        marginTop:30
-    },
-    buttonText:{
-        color: '#FFF',
-        fontSize: 17,
-        fontWeight: 'bold'
-    },
-    buttonSkill: {
-        backgroundColor: '#1f1e25',
-        padding: 15,
-        borderRadius: 50,
-        alignItems: 'center', 
-        marginVertical: 10
-    },
-    textSkill:{
-        color: '#FFF',
-        fontSize: 22,
-        fontWeight: 'bold'
     }
 });
