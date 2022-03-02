@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, Text, StyleSheet, TextInput, Platform } from 'react-native';
+import { SafeAreaView, Text, StyleSheet, TextInput, Platform, ScrollView, FlatList } from 'react-native';
 import { Button } from '../components/Button';
 import { SkillCard } from '../components/SkyllCard';
 
@@ -16,25 +16,25 @@ export  function Home(){
 
     return (
         <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>
+            <Text style={styles.title}>
               Welcome Mauro
-          </Text>
-          <TextInput 
+            </Text>
+            <TextInput 
                 style={styles.input} 
                 placeholder="New Skil" 
                 placeholderTextColor="#555"
                 onChangeText={setNewSkil}
             />
-          <Button onPress={handleAddNewSkill}/>
-          <Text style={[styles.title, {marginVertical:50}]}>
+            <Button onPress={handleAddNewSkill}/>
+            <Text style={[styles.title, {marginVertical:50}]}>
               My Skills
-          </Text>
-
-        {
-            mySkills.map(skill => (
-                <SkillCard skill={skill}/>
-            ))
-        }
+            </Text>
+            
+                <FlatList
+                    data={mySkills}
+                    keyExtractor={item=> item}
+                    renderItem={({item}) => (<SkillCard  skill={item}/> )}/>
+               
         </SafeAreaView>
       );
 }
