@@ -3,10 +3,10 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 // import { Container } from './styles';
 
-export const Button = () => {
+export const Button = ({onPress}) => {
   return (
         <TouchableOpacity 
-           // onPress={handleAddNewSkill}
+           onPress={onPress}
             style={styles.button} 
             activeOpacity={.7}>
             <Text style={styles.buttonText}>Add</Text>
